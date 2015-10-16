@@ -48,7 +48,9 @@
                     <article id="{{item.id}}">
                         <h1>{{item.title.rendered}}</h1>
                         <wp-api-image img="{{item.featured_image}}"></wp-api-image>
-                        <div class="entry-content">{{item.content.rendered}}</div>
+                        <div class="entry-content">
+	                        <wp-api-content content="{{item.content.rendered}}"></wp-api-content>
+                        </div>
                     </article>
                 </template>
             </template>
