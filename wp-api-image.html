@@ -1,7 +1,7 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <dom-module id="wp-api-image" attributes="img">
     <template>
-        <img id="{{img}}" class="-wp-api-image" />
+        <span id="{{img}}" class="-wp-api-image" />
     </template>
     <script>
         Polymer({
@@ -14,19 +14,19 @@
                     return;
                 }
 
-                var fURL,imgURL, imgEl, imgID;
+                var fURL, placeHolder, imgID;
 
-                imgEl =  $( this ).children().first();
+                placeHolder =  $( this ).children().first();
                 fURL = 'http://joshpress.net/wp-json/wp/v2/media/' + this.img;
                 $.when( $.ajax( fURL ) ).then(function( data, textStatus, jqXHR ) {
                     if ( 'success' == textStatus ) {
-                        imgURL = data.source_url;
-                        $(imgID ).attr( 'src', imgURL );
-                        imgEl.src = imgURL;
-                        imgEl.alt = data.alt_text;
-                    }else{
-                        $( imgEl ).remove();
+                        var img = document.createElement("img");
+                        img.setAttribute( 'src', data.source_url );
+                        img.setAttribute( 'alt', data.alt_text );
+                        img.setAttribute( 'class', 'featured-image'  );
+                        placeHolder.append( img );
                     }
+
 
                 });
 

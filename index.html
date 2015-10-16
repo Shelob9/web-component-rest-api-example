@@ -25,7 +25,7 @@
     <template is="dom-repeat" items="{{data}}" id="posts-template">
         <article id="{{item.id}}">
             <h1>{{item.title.rendered}}</h1>
-            <wp-api-image img="3694"></wp-api-image>
+            <wp-api-image img="{{item.featured_image}}"></wp-api-image>
             <div class="entry-content">{{item.content.rendered}}</div>
         </article>
     </template>
