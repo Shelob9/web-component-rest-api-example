@@ -1,10 +1,10 @@
 {
-  "name": "polymerwp",
-  "version": "0.0.1",
+  "name": "wp-api-polymer-example",
+  "version": "0.0.2",
   "authors": [
-    "Josh Pollock <jpollock412@gmail.com>"
+    "Josh Pollock <Josh@JoshPress.net>"
   ],
-  "description": "WordPress REST API Polymer",
+  "description": "WordPress REST API Polymer Web Componets Example",
   "main": "",
   "moduleType": [],
   "license": "GPLv2+",
@@ -18,7 +18,6 @@
   ],
   "dependencies": {
     "iron-ajax": "PolymerElements/iron-ajax#~1.0.6",
-    "iron-image": "polymerelements/iron-image#^1.0.0"
   },
   "devDependencies": {
     "jquery": "~2.1.4"

@@ -1,0 +1,36 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<dom-module id="wp-api-image" attributes="img">
+    <template>
+        <img id="{{img}}" class="-wp-api-image" />
+    </template>
+    <script>
+        Polymer({
+            is: 'wp-api-image',
+            properties :{
+                img: String,
+            },
+            ready: function() {
+                if( 0 == this.img ) {
+                    return;
+                }
+
+                var fURL,imgURL, imgEl, imgID;
+
+                imgEl =  $( this ).children().first();
+                fURL = 'http://joshpress.net/wp-json/wp/v2/media/' + this.img;
+                $.when( $.ajax( fURL ) ).then(function( data, textStatus, jqXHR ) {
+                    if ( 'success' == textStatus ) {
+                        imgURL = data.source_url;
+                        $(imgID ).attr( 'src', imgURL );
+                        imgEl.src = imgURL;
+                        imgEl.alt = data.alt_text;
+                    }else{
+                        $( imgEl ).remove();
+                    }
+
+                });
+
+            }
+        });
+    </script>
+</dom-module>

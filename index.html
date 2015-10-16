@@ -4,20 +4,14 @@
 
     <title>WordPress REST API  With Web Components</title>
 
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.map"></script>
     <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
-    <link rel="import" href="bower_components/iron-image/iron-image.html">
     <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
-    <style>
-        iron-image {
-            background-color: lightgray;
-            margin: 1em;
-        }
-    </style>
+    <link rel="import" href="wp-api-image.html">
 </head>
 <body>
+<!--<wp-api-image img="3694"></wp-api-image>-->
 
 <template is="dom-bind" id="app">
     <iron-ajax auto
@@ -29,13 +23,11 @@
 
     <h1>Posts</h1>
     <template is="dom-repeat" items="{{data}}" id="posts-template">
-        <article id="{{item.id}}" data-featured-image="{{item.id}}">
-            <h1>{{item.title.escaped}}</h1>
-            <iron-image class="iron-featured" style="width:100%; height:300px; background-color: lightgray;" sizing="cover" preload fade src="{{item.featured_image.url"></iron-image>
-            <div class="entry-content">{{item.content.escaped}}</div>
+        <article id="{{item.id}}">
+            <h1>{{item.title.rendered}}</h1>
+            <wp-api-image img="3694"></wp-api-image>
+            <div class="entry-content">{{item.content.rendered}}</div>
         </article>
-        <span class="featured-id" style="visibility: hidden">{{item.featured_image}}</span>
-        <span class="post-id" style="visibility: hidden">{{item.id}}</span>
     </template>
 
 
@@ -45,24 +37,22 @@
 
         var app = document.querySelector('#app');
 
+
         window.addEventListener('WebComponentsReady', function() {
             var ironAjax = document.querySelector('iron-ajax');
             ironAjax.addEventListener('response', function() {
+                /**
                 var title,content,contents,html, nodeNames, $log, fURL,imgURL;
                 $.each( ironAjax.lastResponse, function( i, item ) {
                     title = $.parseHTML(ironAjax.lastResponse[i].title.rendered );
                     ironAjax.lastResponse[i].title.escaped = title[0].data;
-                    ironAjax.lastResponse[i].content.escaped = $( ironAjax.lastResponse[i].content.rendered ).text();
-
-                    fURL = 'http://joshpress.net/wp-json/wp/v2/media/' + ironAjax.lastResponse[i].featured_image;
-                    $.when( $.ajax( url ) ).then(function( data, textStatus, jqXHR ) {
-                        imgURL = data.source_url;
-                        ironAjax.lastResponse[i].featured_image.url = imgURL;
-                    });
+                    //ironAjax.lastResponse[i].content.escaped = $( ironAjax.lastResponse[i].content.rendered ).text();
+                    ironAjax.lastResponse[i].content.escaped = ironAjax.lastResponse[i].content.rendered;
                 });
-
+                **/
 
             });
+
 
 
             ironAjax.generateRequest();
