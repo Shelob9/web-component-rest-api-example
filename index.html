@@ -9,26 +9,53 @@
     <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
     <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
     <link rel="import" href="wp-api-image.html">
+    <style>
+        img.featured-image {
+            width: 100%;
+            height: auto;
+        }
+
+
+    </style>
+    <style is="custom-style">
+        .container {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        }
+    </style>
 </head>
 <body>
-<!--<wp-api-image img="3694"></wp-api-image>-->
+<div class="container">
+    <div class="vertical layout" id="main" >
+        <div class="flex-3" id="masthead">
+            <div class="horizontal layout" style="height:100px">
+                <div class="flex">Logo</div>
+                <div class="flex-9">Menu</div>
+            </div>
 
-<template is="dom-bind" id="app">
-    <iron-ajax auto
-               url="http://joshpress.net/wp-json/wp/v2/posts"
-               handle-as="json"
-               last-response="{{data}}">
+        </div>
+        <div class="flex" id="primary">
+            <template is="dom-bind" id="app">
+                <iron-ajax auto
+                           url="http://joshpress.net/wp-json/wp/v2/posts"
+                           handle-as="json"
+                           last-response="{{data}}">
 
-    </iron-ajax>
+                </iron-ajax>
 
-    <h1>Posts</h1>
-    <template is="dom-repeat" items="{{data}}" id="posts-template">
-        <article id="{{item.id}}">
-            <h1>{{item.title.rendered}}</h1>
-            <wp-api-image img="{{item.featured_image}}"></wp-api-image>
-            <div class="entry-content">{{item.content.rendered}}</div>
-        </article>
-    </template>
+                <h1>Posts</h1>
+                <template is="dom-repeat" items="{{data}}" id="posts-template">
+                    <article id="{{item.id}}">
+                        <h1>{{item.title.rendered}}</h1>
+                        <wp-api-image img="{{item.featured_image}}"></wp-api-image>
+                        <div class="entry-content">{{item.content.rendered}}</div>
+                    </article>
+                </template>
+            </template>
+        </div>
+        <div class="flex-3" id="footer">Footer</div>
+    </div>
+</div>
 
 
 <script>
