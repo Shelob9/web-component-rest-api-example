@@ -1,13 +1,13 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
-<dom-module id="wp-api-posts" attributes="type">
+<dom-module id="wp-api-posts" attributes="type params">
     <template>
         <iron-ajax auto
                    url="{{endpoint}}"
+                   params="{params}"
                    handle-as="json"
                    last-response="{{data}}">
 
         </iron-ajax>
-
         <h1>Posts</h1>
         <template is="dom-repeat" items="{{data}}" id="posts-template">
             <article id="{{item.id}}">
