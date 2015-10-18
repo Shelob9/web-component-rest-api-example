@@ -8,6 +8,7 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
     <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+    <link rel="import" href="wp-api-posts.html">
     <link rel="import" href="wp-api-image.html">
     <style>
         img.featured-image {
@@ -25,7 +26,8 @@
     </style>
 </head>
 <body>
-<div class="container">
+
+<div class="container" id="app" data-wp-api-root="http://joshpress.net/wp-json">
     <div class="vertical layout" id="main" >
         <div class="flex-3" id="masthead">
             <div class="horizontal layout" style="height:100px">
@@ -35,25 +37,7 @@
 
         </div>
         <div class="flex" id="primary">
-            <template is="dom-bind" id="app">
-                <iron-ajax auto
-                           url="http://joshpress.net/wp-json/wp/v2/posts"
-                           handle-as="json"
-                           last-response="{{data}}">
-
-                </iron-ajax>
-
-                <h1>Posts</h1>
-                <template is="dom-repeat" items="{{data}}" id="posts-template">
-                    <article id="{{item.id}}">
-                        <h1><wp-api-content content="{{item.title.rendered}}"></wp-api-content></h1>
-                        <wp-api-image img="{{item.featured_image}}"></wp-api-image>
-                        <div class="entry-content">
-	                        <wp-api-content content="{{item.content.rendered}}"></wp-api-content>
-                        </div>
-                    </article>
-                </template>
-            </template>
+            <wp-api-posts type="posts"></wp-api-posts>
         </div>
         <div class="flex-3" id="footer">Footer</div>
     </div>

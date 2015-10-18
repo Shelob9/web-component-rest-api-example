@@ -1,0 +1,38 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<dom-module id="wp-api-posts" attributes="type">
+    <template>
+        <iron-ajax auto
+                   url="{{endpoint}}"
+                   handle-as="json"
+                   last-response="{{data}}">
+
+        </iron-ajax>
+
+        <h1>Posts</h1>
+        <template is="dom-repeat" items="{{data}}" id="posts-template">
+            <article id="{{item.id}}">
+                <h1><wp-api-content content="{{item.title.rendered}}"></wp-api-content></h1>
+                <wp-api-image img="{{item.featured_image}}"></wp-api-image>
+                <div class="entry-content">
+                    <wp-api-content content="{{item.content.rendered}}"></wp-api-content>
+                </div>
+            </article>
+        </template>
+    </template>
+    <script>
+        Polymer({
+            is: 'wp-api-posts',
+            properties :{
+                type: String
+            },
+            ready: function() {
+                var root = $( '#app' ).attr( 'data-wp-api-root' );
+                if( 'posts' == this.type || 'post' == this.type ) {
+                    this.endpoint = root + '/wp/v2/posts'
+                }else{
+                    this.endpoint = root + '/wp/v2/' + this.type;
+                }
+            }
+        });
+    </script>
+</dom-module>

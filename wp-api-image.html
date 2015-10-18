@@ -8,8 +8,11 @@
             is: 'wp-api-image',
             properties :{
                 img: String,
+                root: String
             },
             ready: function() {
+                var root = $( '#app' ).attr( 'data-wp-api-root' );
+                var endpoint = root + '/wp/v2/media/';
                 if( 0 == this.img ) {
                     return;
                 }
@@ -17,7 +20,7 @@
                 var fURL, placeHolder, imgID;
 
                 placeHolder =  $( this ).children().first();
-                fURL = 'http://joshpress.net/wp-json/wp/v2/media/' + this.img;
+                fURL = endpoint + this.img;
                 $.when( $.ajax( fURL ) ).then(function( data, textStatus, jqXHR ) {
                     if ( 'success' == textStatus ) {
                         var img = document.createElement("img");

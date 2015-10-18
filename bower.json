@@ -17,7 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "iron-ajax": "PolymerElements/iron-ajax#~1.0.6",
+    "iron-ajax": "PolymerElements/iron-ajax#~1.0.6"
   },
   "devDependencies": {
     "jquery": "~2.1.4"
