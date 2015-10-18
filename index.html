@@ -46,7 +46,7 @@
                 <h1>Posts</h1>
                 <template is="dom-repeat" items="{{data}}" id="posts-template">
                     <article id="{{item.id}}">
-                        <h1>{{item.title.rendered}}</h1>
+                        <h1><wp-api-content content="{{item.title.rendered}}"></wp-api-content></h1>
                         <wp-api-image img="{{item.featured_image}}"></wp-api-image>
                         <div class="entry-content">
 	                        <wp-api-content content="{{item.content.rendered}}"></wp-api-content>
@@ -70,16 +70,7 @@
         window.addEventListener('WebComponentsReady', function() {
             var ironAjax = document.querySelector('iron-ajax');
             ironAjax.addEventListener('response', function() {
-                /**
-                var title,content,contents,html, nodeNames, $log, fURL,imgURL;
-                $.each( ironAjax.lastResponse, function( i, item ) {
-                    title = $.parseHTML(ironAjax.lastResponse[i].title.rendered );
-                    ironAjax.lastResponse[i].title.escaped = title[0].data;
-                    //ironAjax.lastResponse[i].content.escaped = $( ironAjax.lastResponse[i].content.rendered ).text();
-                    ironAjax.lastResponse[i].content.escaped = ironAjax.lastResponse[i].content.rendered;
-                });
-                **/
-
+                //console.log( ironAjax.lastResponse );
             });
 
 
@@ -87,8 +78,21 @@
             ironAjax.generateRequest();
         });
 
+        Polymer({
+            is: 'wp-api-content',
+            properties: {
+                'content' : String,
+            },
+            ready: function() {
+                this.innerHTML = this.content;
+            }
+        })
+
 
     })(document);
+
+
+
 
 </script>
 
